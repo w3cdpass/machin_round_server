@@ -6,7 +6,7 @@ const taskSchema = new mongoose.Schema({
     priority: { type: String, enum: ['low', 'medium', 'high'], default: 'low' },
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     status: { type: Boolean, default: false }
-}, { timestamps: true ,strict: false} );
+}, { timestamps: true, strict: false });
 
 const Task = mongoose.model("Task", taskSchema);
-module.exports = Task
+module.exports = Task;

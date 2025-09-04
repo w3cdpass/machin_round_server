@@ -1,16 +1,24 @@
 const Task = require('../model/Task');
 
-// http methods Get, Post, Put, Patch, Delete
-
-/**
- * 
- * @param {*} req 
- * @param {*} res 
- */
 exports.createTask = async (req, res) => {
     try {
-        const task = await Task.create(req.body);
-        res.status(201).json({ satus: 'Task Created', task: task })
+        const { lat, lon } = req.query
+        async function weatherdata() {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=4bd6479ce767b7d890381190de3ece0d`, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            const data = await response.json()
+            const completeData = {
+                weather: data,
+                ...req.body
+            }
+            const task = await Task.create(completeData);
+            res.status(201).json({ satus: 'Task Created', task: task })
+        }
+        await weatherdata()
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
