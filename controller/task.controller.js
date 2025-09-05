@@ -2,7 +2,7 @@ const Task = require('../model/Task');
 
 exports.createTask = async (req, res) => {
     try {
-        const { lat, lon } = req.query
+        const { lat, lon } = req.query;
         async function weatherdata() {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=4bd6479ce767b7d890381190de3ece0d`, {
                 method: 'GET',

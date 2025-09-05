@@ -5,6 +5,7 @@ const taskSchema = new mongoose.Schema({
     desc: { type: String, required: true },
     priority: { type: String, enum: ['low', 'medium', 'high'], default: 'low' },
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    file: { type: String },
     status: { type: Boolean, default: false }
 }, { timestamps: true, strict: false });
 
